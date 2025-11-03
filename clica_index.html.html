@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mensagem</title>
+  <style>
+    body {
+      background: black;
+      color: red;
+      font-size: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #loading { color: white; margin-bottom: 50px; }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading</div>
+  <div id="mensagem"></div>
+
+  <script>
+    const loading = document.getElementById('loading');
+    const mensagem = document.getElementById('mensagem');
+    let count = 0;
+
+    // animação do loading
+    const loadingInterval = setInterval(() => {
+      loading.textContent = "Loading" + ".".repeat(count % 4);
+      count++;
+    }, 500);
+
+    // depois de 3 segundos mostra a mensagem
+    setTimeout(() => {
+      clearInterval(loadingInterval);
+      loading.style.display = "none";
+
+      const texto = "tr0ux4 😝";
+      let i = 0;
+
+      // função de digitação
+      function digitar() {
+        if (i < texto.length) {
+          mensagem.textContent += texto[i];
+          i++;
+          setTimeout(digitar, 100);
+        } else {
+          // começa a piscar
+          setInterval(() => {
+            mensagem.style.visibility = mensagem.style.visibility === 'hidden' ? 'visible' : 'hidden';
+          }, 500);
+        }
+      }
+
+      digitar();
+    }, 3000);
+  </script>
+</body>
+</html>
+
